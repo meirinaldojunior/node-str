@@ -1,5 +1,8 @@
 'use stricts'
 
+/**
+ * Controller Products
+ */
 exports.post = (req, resp, next) => {
     resp.status(201).send(req.body);
 };

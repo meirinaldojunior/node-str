@@ -80,5 +80,16 @@ exports.put = (req, resp, next) => {
 };
 
 exports.delete = (req, respo, next) => {
-  respo.status(200).send(req.body);
+    const id = req.params.id;
+    Product.findByIdAndRemove(id).then((result) => {
+        respo.status(200).send({
+            message: "Deletado com sucesso"
+        });      
+    }).catch((err) => {
+        respo.status(400).send({
+            message: "Erro ao deletar produto",
+            data: err
+        });
+    });
+  
 };

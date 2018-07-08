@@ -2,6 +2,17 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
+
+/**
+ * Connect mongodb with mongoose
+ * 
+ * Ps: For connect in mongodb with mongoose is necessary export in 
+ * environment variable the parameter the URL_MONGO
+ * containts username and password,
+ * example: mongodb://user:pass@hostmongo.com:port/databasename
+ */
+mongoose.connect(process.env.URL_MONGO);
 
 /**
  * Middlwares routes

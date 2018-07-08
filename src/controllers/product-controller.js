@@ -37,6 +37,16 @@ exports.getById = (req, resp, next) => {
         });
 };
 
+exports.getByTags = (req, resp, next) => {
+  Product.find({tags: req.params.tag, active: true}, "title price slug tags")
+    .then(result => {
+      resp.status(200).send({ result });
+    })
+    .catch(err => {
+      resp.status(400).send({ err });
+    });
+};
+
 exports.post = (req, resp, next) => {
   var product = new Product(req.body);
   product

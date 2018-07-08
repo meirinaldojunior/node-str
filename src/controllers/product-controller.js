@@ -18,27 +18,30 @@ exports.get = (req, resp, next) => {
 };
 
 exports.getBySlug = (req, resp, next) => {
-    Product.findOne({ slug: req.params.slug , active: true }, "title price slug tags")
-        .then(result => {
-            resp.status(200).send({ result });
-        })
-        .catch(err => {
-            resp.status(400).send({ err });
-        });
+  Product.findOne(
+    { slug: req.params.slug, active: true },
+    "title price slug tags"
+  )
+    .then(result => {
+      resp.status(200).send({ result });
+    })
+    .catch(err => {
+      resp.status(400).send({ err });
+    });
 };
 
 exports.getById = (req, resp, next) => {
-    Product.findById(req.params.id, "title price slug tags")
-        .then(result => {
-            resp.status(200).send({ result });
-        })
-        .catch(err => {
-            resp.status(400).send({ err });
-        });
+  Product.findById(req.params.id, "title price slug tags")
+    .then(result => {
+      resp.status(200).send({ result });
+    })
+    .catch(err => {
+      resp.status(400).send({ err });
+    });
 };
 
 exports.getByTags = (req, resp, next) => {
-  Product.find({tags: req.params.tag, active: true}, "title price slug tags")
+  Product.find({ tags: req.params.tag, active: true }, "title price slug tags")
     .then(result => {
       resp.status(200).send({ result });
     })
@@ -61,10 +64,19 @@ exports.post = (req, resp, next) => {
 
 exports.put = (req, resp, next) => {
   const id = req.params.id;
-  resp.status(201).send({
-    id: id,
-    item: req.body
-  });
+  Product.findByIdAndUpdate(id, {
+    $set: {
+      title: req.body.title,
+      description: req.body.description,
+      price: req.body.price
+    }
+  })
+    .then(result => {
+      resp.status(200).send({ message: "Atualizado com sucesso..." });
+    })
+    .catch(err => {
+      resp.status(400).send({ message: "Falha ao atualizar", data: err });
+    });
 };
 
 exports.delete = (req, respo, next) => {

@@ -21,6 +21,11 @@ app.use(bodyParser.json()); //faz um parse do conteúdo recebido para torna-lo j
 app.use(bodyParser.urlencoded({ extended: false })); //codifica URL para aceitar caracteres especiais
 
 /**
+ * Call models
+ */
+const Product = require("./models/product");
+
+/**
  * Loading routes
  */
 const indexRoute = require('./routes/index-route');

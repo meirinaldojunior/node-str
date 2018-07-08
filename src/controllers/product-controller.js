@@ -81,7 +81,7 @@ exports.put = (req, resp, next) => {
 
 exports.delete = (req, respo, next) => {
     const id = req.params.id;
-    Product.findByIdAndRemove(id).then((result) => {
+    Product.findOneAndRemove(id).then((result) => {
         respo.status(200).send({
             message: "Deletado com sucesso"
         });      
